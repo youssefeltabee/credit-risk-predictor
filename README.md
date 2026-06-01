@@ -1,5 +1,12 @@
 # Credit Risk Predictor
 
+![Python](https://img.shields.io/badge/Python-3.11-3776AB?logo=python)
+![XGBoost](https://img.shields.io/badge/XGBoost-0.923%20AUC-EC1C24)
+![scikit-learn](https://img.shields.io/badge/scikit--learn-1.8-F7931E?logo=scikit-learn)
+![Streamlit](https://img.shields.io/badge/Streamlit-1.35-FF4B4B?logo=streamlit)
+![SHAP](https://img.shields.io/badge/SHAP-0.51-2E86AB)
+![License](https://img.shields.io/badge/License-MIT-green)
+
 ML-powered loan application risk assessment with SHAP explainability.
 
 ## Overview
@@ -11,39 +18,26 @@ Predict whether a loan applicant will default using XGBoost, then explain *why* 
 ## Project Structure
 
 ```
-credit-risk-predictor/
-├── data/
-│   └── credit_risk_data.csv      # Generated dataset (50K rows)
-├── notebooks/
-│   ├── 01_eda_preprocessing.ipynb # EDA, scaling, SMOTE
-│   └── 02_modeling_shap.ipynb    # XGBoost training + SHAP analysis
-├── src/
-│   ├── generate_data.py           # Synthetic data generator
-│   └── train_model.py             # Standalone training script
-├── dashboard/
-│   └── dashboard.py               # Streamlit dashboard
-├── models/
-│   ├── xgb_model.pkl              # Trained XGBoost model
-│   ├── scaler.pkl                 # Fitted StandardScaler
-│   └── shap_explainer.pkl         # SHAP TreeExplainer
-├── .gitignore
-├── requirements.txt
-└── README.md
+src/generate_data.py              # Synthetic data generator
+src/train_model.py                 # Standalone training script
+dashboard/dashboard.py             # Streamlit dashboard
+notebooks/01_eda_preprocessing.ipynb # EDA, scaling, SMOTE
+notebooks/02_modeling_shap.ipynb    # XGBoost training + SHAP analysis
+models/xgb_model.pkl               # Trained XGBoost model
+models/scaler.pkl                  # Fitted StandardScaler
+models/shap_explainer.pkl          # SHAP TreeExplainer
+.gitignore
+requirements.txt
+README.md
 ```
 
 ## Quick Start
 
 ```bash
 pip install -r requirements.txt
-
-# Run notebooks to recreate from scratch
 jupyter notebook notebooks/01_eda_preprocessing.ipynb
 jupyter notebook notebooks/02_modeling_shap.ipynb
-
-# Or just train directly
 python src/train_model.py
-
-# Launch dashboard
 streamlit run dashboard/dashboard.py
 ```
 
@@ -57,7 +51,7 @@ streamlit run dashboard/dashboard.py
 
 **Top predictors**: credit_score, dti_ratio, delinquent_history, interest_rate.
 
-Higher credit scores drive SHAP values downward (toward approval). Delinquent history drives them upward (toward denial).
+Higher credit scores drive SHAP values downward (toward approval). Delinquent history drives them upward (toward default).
 
 ## Decision Threshold
 
